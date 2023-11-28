@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>복붙유틸 - 카테고리 단순관리형</title>
+
+	<!-- 스타일 -->
+	<link rel="stylesheet" href="/style.css">
+	<link rel="stylesheet" href="./category-control.css">
+</head>
+<body>
+	<div class="div2">
+		<div class="category-control" data-level="1">
+			<div class="control-header">
+				<p>제조사</p>
+				<button type="button" class="control-add">추가</button>
+			</div>
+			<table class="category-table" data-parent="0">
+				<!-- <tr class="category-row" data-id="KIA">
+					<td><img src="https://newsimg.hankookilbo.com/cms/articlerelease/2021/07/15/f36f6010-8212-4d02-ae3f-1af4d595039c.jpg" alt="롤스로이스 팬텀"></td>
+					<td>카테고리명</td>
+					<td>노출/비노출</td>
+					<td>
+						<button type="button">순위 +</button>
+						<button type="button">순위 -</button>
+					</td>
+					<td>
+						<button type="button">수정</button>
+					</td>
+				</tr> -->
+			</table>
+		</div>
+		<div class="category-control" data-level="2">
+			<div class="control-header">
+				<p>모델</p>
+				<button type="button" class="control-add">추가</button>
+			</div>
+			<div class="category-table-wrap" data-level="2">
+
+			</div>
+			<!-- <table class="category-table" data-parent="0">
+				<tr class="category-row" data-id="KIA">
+					<td><img src="https://newsimg.hankookilbo.com/cms/articlerelease/2021/07/15/f36f6010-8212-4d02-ae3f-1af4d595039c.jpg" alt="롤스로이스 팬텀"></td>
+					<td>카테고리명</td>
+					<td>노출/비노출</td>
+					<td>
+						<button type="button">순위 +</button>
+						<button type="button">순위 -</button>
+					</td>
+					<td>
+						<button type="button">수정</button>
+					</td>
+				</tr>
+			</table> -->
+		</div>
+	</div>
+
+	<script>
+		let categoryLevel1 = {
+			'0': [
+				{
+					id: 'KIA',
+					images: 'https://newsimg.hankookilbo.com/cms/articlerelease/2021/07/15/f36f6010-8212-4d02-ae3f-1af4d595039c.jpg',
+					name: 'KIA',
+					name_ko: '기아',
+					is_show: true,
+					parent: '0',
+					level: 1
+				},
+				{
+					id: 'BMW',
+					images: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/0_Kia_Sportage_Hybrid_%28NQ5%29_1.jpg',
+					name: 'BMW',
+					name_ko: '비머',
+					is_show: true,
+					parent: '0',
+					level: 1
+				},
+				{
+					id: 'Audi',
+					images: 'https://www.motorgraph.com/news/photo/201905/22564_72789_5839.jpg',
+					name: 'Audi',
+					name_ko: '아우디',
+					is_show: false,
+					parent: '0',
+					level: 1
+				}
+			],
+		};
+		let categoryLevel2 = {
+			'KIA': [
+				{
+					id: 'KIA-1',
+					images: null,
+					name: 'KIA-1',
+					name_ko: '기아 1',
+					is_show: true,
+					parent: 'KIA',
+					level: 2
+				},
+				{
+					id: 'KIA-2',
+					images: null,
+					name: 'KIA-2',
+					name_ko: '기아 2',
+					is_show: true,
+					parent: 'KIA',
+					level: 2
+				},
+				{
+					id: 'KIA-3',
+					images: null,
+					name: 'KIA-3',
+					name_ko: '기아 3',
+					is_show: false,
+					parent: 'KIA',
+					level: 2
+				}
+			],
+			'BMW': [
+				{
+					id: 'BMW-1',
+					images: null,
+					name: 'BMW-1',
+					name_ko: '비엠-1',
+					is_show: true,
+					parent: 'BMW',
+					level: 2
+				},
+				{
+					id: 'BMW-2',
+					images: null,
+					name: 'BMW-2',
+					name_ko: '비엠-2',
+					is_show: true,
+					parent: 'BMW',
+					level: 2
+				},
+				{
+					id: 'BMW-3',
+					images: null,
+					name: 'BMW-3',
+					name_ko: '비엠-3',
+					is_show: false,
+					parent: 'BMW',
+					level: 2
+				}
+			],
+			'Audi': [
+				{
+					id: 'Audi-1',
+					images: null,
+					name: 'Audi-1',
+					name_ko: '아우디-1',
+					is_show: true,
+					parent: 'Audi',
+					level: 2
+				},
+				{
+					id: 'Audi-2',
+					images: null,
+					name: 'Audi-2',
+					name_ko: '아우디-2',
+					is_show: true,
+					parent: 'Audi',
+					level: 2
+				},
+				{
+					id: 'Audi-3',
+					images: null,
+					name: 'Audi-3',
+					name_ko: '아우디-3',
+					is_show: false,
+					parent: 'Audi',
+					level: 2
+				}
+			]
+		}
+		let $categoryControl = {
+			init: function() {
+				let level2 = Object.values(categoryLevel2);
+				let level2Keys = Object.keys(categoryLevel2);
+				console.log(level2Keys);
+
+				level2.forEach((level2Lists, idx) => {
+					console.log('/**************************/');
+					console.log(level2Lists);
+					document.querySelector('.category-table-wrap[data-level="2"]').insertAdjacentHTML('beforeEnd', `
+						<table class="category-table" id="cate-${level2Keys[idx]}">
+							<tbody>
+							</tbody>
+						</table>
+					`);
+					level2Lists.forEach(($el) => {
+						// 이미지 유무
+						let $images = '';
+						if ($el.iamges) {
+							$images = `<td><img src="${$el.images}" alt="${$el.id}의 대표 이미지"></td>`;
+						}
+						// 노출 유무
+						let $is_show = '미노출';
+						if ($is_show) {
+							$is_show = '노출'
+						}
+						document.querySelector(`#cate-${level2Keys[idx]} tbody`).insertAdjacentHTML('beforeEnd', `
+						<tr class="category-row" data-id="${$el.id}">
+							${$images}
+							<td>${$el.name}</td>
+							<td>${$el.name_ko}</td>
+							<td>${$is_show}</td>
+							<td>
+								<button type="button" onClick="$categoryControl.changeOrder('${level2Keys[idx]}', '${$el.id}', 'true')">순위 +</button>
+								<button type="button" onClick="$categoryControl.changeOrder('${level2Keys[idx]}', '${$el.id}', 'false')">순위 -</button>
+							</td>
+							<td>
+								<button type="button">수정</button>
+							</td>
+						</tr>
+						`);
+					});
+				});
+			},
+			changeOrder: function(parendId, id, type) {
+				console.log(parendId);
+				console.log(id);
+				console.log(type);
+			}
+		}
+
+		document.addEventListener('DOMContentLoaded', function() {
+			$categoryControl.init();
+		})
+	</script>
+</body>
+</html>

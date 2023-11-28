@@ -1,0 +1,180 @@
+// 세팅값 모음
+$zindex: 100;			// z-index 세팅
+$radio: 100%;			// 이미지 비율
+$border-radius: 20px;	// 이미지 border-radius
+$border-radius-m: 16px;	// 이미지 border-radius 모바일
+$m-space: 16px;			// 모바일 좌우 여백
+
+// reset
+button {padding: 0 0 0 0; cursor: pointer;}
+
+#promotionPopupBg,
+#appPopupBg {
+	position: fixed;
+	z-index: $zindex;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #222222;
+	opacity: 0.4;
+}
+#promotionPopup {
+	position: fixed;
+	z-index: $zindex + 1;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	.swiper {
+		position: relative;
+		width: 400px;
+		font-size: 0;
+		// border-radius: $border-radius;
+		overflow: hidden;
+		.swiper-wrapper {
+			.swiper-slide {
+				a {
+					display: block;
+					position: relative;
+					// &:after {
+					// 	content: '';
+					// 	display: block;
+					// 	padding-bottom: $radio;
+					// }
+					img {
+						// position: absolute;
+						// top: 0;
+						// left: 0;
+						width: 100%;
+						// height: 100%;
+						// object-fit: cover;
+					}
+				}
+			}
+		}
+		.swiper-count {
+			$height: 32px;
+
+			position: absolute;
+			z-index: 2;
+			right: 22px;
+			bottom: 20px;
+			left: auto;
+			width: auto;
+			height: $height;
+			padding: 0 23px;
+			background: rgba(0,0,0,0.4);
+			border-radius: calc($height / 2);
+			text-align: center;
+			font-size: 16px;
+			line-height: $height - 2px;
+			color: #fff;
+			font-weight: 200;
+			.swiper-pagination-total {
+				opacity: 0.6;
+			}
+		}
+	}
+	.promo-menu {
+		display: flex;
+		justify-content: space-between;
+		padding: 10px 20px;
+		background: #444;
+		button {
+			border: 0 none;
+			background: none;
+			line-height: 26px;
+			color: #fff;
+			&.pm-close-day {
+				font-size: 16px;
+				font-weight: 200;
+			}
+			&.pm-close-x {
+				width: 26px;
+				height: 26px;
+				background: url('../images/close.svg') no-repeat center center;
+				background-size: 100% auto;
+				font-size: 0;
+				cursor: pointer;
+			}
+		}
+	}
+}
+#appPopupBg {
+	z-index: $zindex + 9;
+}
+#appPopup {
+	position: fixed;
+	z-index: $zindex + 10;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	.text_top {
+		font-size: 18px;
+		font-weight: 100;
+		color: #FFFFFF;
+	}
+	.logo {
+		margin: 14px 0 24px;
+	}
+	.bm_button {
+		margin-bottom: 24px;
+	}
+	.just_close {
+		font-size: 14px;
+		font-weight: 100;
+		color: #FFFFFF;
+		text-decoration: underline;
+	}
+}
+
+@media (max-width: 1200px) {
+	#promotionPopup {
+		top: auto;
+		left: 0;
+		bottom: 0;
+		transform: none;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		padding: 0 0;
+		.swiper {
+			width: 100%;
+			border-radius: $border-radius-m $border-radius-m 0 0;
+			.swiper-count {
+				$height: 20px;
+
+				right: 14px;
+				bottom: 14px;
+				height: $height;
+				padding: 0 12px;
+				font-size: 12px;
+				line-height: $height - 1px;
+			}
+		}
+		.promo-menu {
+			height: 50px;
+			padding: 0 14px;
+			align-items: center;
+			button {
+				line-height: 18px;
+				&.pm-close-day {
+					font-size: 14px;
+				}
+				&.pm-close-x {
+					width: 18px;
+					height: 18px;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+

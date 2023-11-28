@@ -1,0 +1,151 @@
+button {
+  padding: 0 0 0 0;
+  cursor: pointer;
+}
+
+#promotionPopupBg,
+#appPopupBg {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #222222;
+  opacity: 0.4;
+}
+
+#promotionPopup {
+  position: fixed;
+  z-index: 101;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#promotionPopup .swiper {
+  position: relative;
+  width: 400px;
+  font-size: 0;
+  overflow: hidden;
+}
+#promotionPopup .swiper .swiper-wrapper .swiper-slide a {
+  display: block;
+  position: relative;
+}
+#promotionPopup .swiper .swiper-wrapper .swiper-slide a img {
+  width: 100%;
+}
+#promotionPopup .swiper .swiper-count {
+  position: absolute;
+  z-index: 2;
+  right: 22px;
+  bottom: 20px;
+  left: auto;
+  width: auto;
+  height: 32px;
+  padding: 0 23px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 30px;
+  color: #fff;
+  font-weight: 200;
+}
+#promotionPopup .swiper .swiper-count .swiper-pagination-total {
+  opacity: 0.6;
+}
+#promotionPopup .promo-menu {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #444;
+}
+#promotionPopup .promo-menu button {
+  border: 0 none;
+  background: none;
+  line-height: 26px;
+  color: #fff;
+}
+#promotionPopup .promo-menu button.pm-close-day {
+  font-size: 16px;
+  font-weight: 200;
+}
+#promotionPopup .promo-menu button.pm-close-x {
+  width: 26px;
+  height: 26px;
+  background: url("../images/close.svg") no-repeat center center;
+  background-size: 100% auto;
+  font-size: 0;
+  cursor: pointer;
+}
+
+#appPopupBg {
+  z-index: 109;
+}
+
+#appPopup {
+  position: fixed;
+  z-index: 110;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+#appPopup .text_top {
+  font-size: 18px;
+  font-weight: 100;
+  color: #FFFFFF;
+}
+#appPopup .logo {
+  margin: 14px 0 24px;
+}
+#appPopup .bm_button {
+  margin-bottom: 24px;
+}
+#appPopup .just_close {
+  font-size: 14px;
+  font-weight: 100;
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+@media (max-width: 1200px) {
+  #promotionPopup {
+    top: auto;
+    left: 0;
+    bottom: 0;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 0;
+  }
+  #promotionPopup .swiper {
+    width: 100%;
+    border-radius: 16px 16px 0 0;
+  }
+  #promotionPopup .swiper .swiper-count {
+    right: 14px;
+    bottom: 14px;
+    height: 20px;
+    padding: 0 12px;
+    font-size: 12px;
+    line-height: 19px;
+  }
+  #promotionPopup .promo-menu {
+    height: 50px;
+    padding: 0 14px;
+    align-items: center;
+  }
+  #promotionPopup .promo-menu button {
+    line-height: 18px;
+  }
+  #promotionPopup .promo-menu button.pm-close-day {
+    font-size: 14px;
+  }
+  #promotionPopup .promo-menu button.pm-close-x {
+    width: 18px;
+    height: 18px;
+  }
+}/*# sourceMappingURL=wbz-promotion-popup.css.map */

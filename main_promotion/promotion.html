@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0,target-densitydpi=medium-dpi, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="description" content="BM 마켓">
+    <title>BM마켓</title>
+		<link rel="stylesheet" href="../reset.css">
+    <link rel="stylesheet" href="./css/wbz-promotion-popup.css">
+	<link rel="stylesheet" href="./css/swiper-bundle.min.css">
+	<script src="./js/swiper-bundle.min.js"></script>
+</head>
+<body style="padding-top: 50px;">
+	<style>
+		.sample_text {font-size: 20px; margin: 0 0 10px;}
+		.sample_text:not(:first-child) {margin-top: 50px;}
+		.sample_text b {font-size: 26px;}
+	</style>
+	<div class="w_set">
+
+		<p class="sample_text">
+			<b>메인 프로모션 팝업 슬라이드</b><br>
+			- n일후 더보기 기능 포함 (localStorage)<br>
+			<br><br>
+
+			<button type="button" class="bm_button type_auto" onclick="localStorage.removeItem('promoshowtime'); location.reload()">그만보기 리셋</button>
+		</p>
+
+		<div id="promotionPopupBg" style="display: none;"></div>
+		<div id="promotionPopup" style="display: none;">
+			<div class="swiper">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<a href="#">
+							<img src="https://news.seoul.go.kr/env/files/2021/07/60efce692d7fd6.15359957.jpeg" alt="">
+						</a>
+					</div>
+					<div class="swiper-slide">
+						<a href="#">
+							<img src="https://gongu.copyright.or.kr/editorUpload/20210629140610231d10a1-77b2-485b-9e3e-f960bb0b5201.jpg" alt="">
+						</a>
+					</div>
+					<div class="swiper-slide">
+						<a href="#">
+							<img src="https://img.freepik.com/premium-vector/shopping-online-on-website-or-mobile-application-vector-korean-translation-hashtag-event_260828-1214.jpg" alt="">
+						</a>
+					</div>
+					<div class="swiper-slide">
+						<a href="#">
+							<img src="https://i.namu.wiki/i/qdZcGXrTXbdo1ucZCVwLseSyFKu40ya5Ahk3q3ZzPvbbq6MkTF7zeCc4mytDxyPKvGZv3WyitMjLace-0d1NvQ.webp" alt="">
+						</a>
+					</div>
+				</div>
+				<div class="swiper-count"></div>
+			</div>
+			<div class="promo-menu">
+				<button type="button" class="pm-close pm-close-day">오늘은 그만 보기</button>
+				<button type="button" class="pm-close pm-close-x">닫기</button>
+			</div>
+		</div>
+
+		<script>
+			var handleStorage = {
+				// 스토리지에 데이터 쓰기(이름, 만료일)
+				setStorage: function (name, exp) {
+					// 만료 시간 구하기(exp를 ms단위로 변경)
+					var date = new Date();
+					date = date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+
+					// 로컬 스토리지에 저장하기
+						// (값을 따로 저장하지 않고 만료 시간을 저장)
+					localStorage.setItem(name, date)
+				},
+				// 스토리지 읽어오기
+				getStorage: function (name) {
+					var now = new Date();
+					now = now.setTime(now.getTime());
+					// 현재 시각과 스토리지에 저장된 시각을 각각 비교하여
+					// 시간이 남아 있으면 true, 아니면 false 리턴
+					return parseInt(localStorage.getItem(name)) > now
+				}
+			};
+
+			// 날짜 컨트롤
+			if (!handleStorage.getStorage('promoshowtime')) {
+				document.querySelector('#promotionPopupBg').style.display = '';
+				document.querySelector('#promotionPopup').style.display = '';
+
+				// 기존 닫기, 날짜 컨트롤 있을시 해당 부분만 사용
+				const swiper = new Swiper('#promotionPopup .swiper', {
+					autoHeight : true,
+					pagination: {
+						el: '.swiper-count',
+						type: 'fraction',
+						// 갯수 표현 마크업
+						renderFraction: function (currentClass, totalClass) {
+							return `<span class="${currentClass}"></span>` +
+									`/` +
+									`<span class="${totalClass}"></span>`;
+						}
+					},
+				});
+
+				// 일반 닫기 이벤트
+				document.querySelectorAll('.pm-close').forEach(($el) => {
+					$el.addEventListener('click', (e) => {
+						document.querySelector('#promotionPopupBg').remove();
+						document.querySelector('#promotionPopup').remove();
+					});
+				});
+				// 그만보기 체크
+				document.querySelector('.pm-close.pm-close-day').addEventListener('click', () => {
+					// 하루동안 보지 않게 세팅
+					handleStorage.setStorage('promoshowtime', 1);
+				});	
+			}
+		</script>
+	</div>
+	<div style="padding: 300px;"></div>
+</body>
+</html>
